@@ -6,7 +6,7 @@
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 01:59:40 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/08 02:22:22 by mmeuric          ###   ########.fr       */
+/*   Updated: 2025/02/08 02:37:59 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	putstr_fd(int fd, char *str)
 
 long	ft_atoi(const char *str)
 {
-	long nb;
-	int sign;
-	int i;
+	long	nb;
+	int		sign;
+	int		i;
 
 	i = 0;
 	sign = 1;

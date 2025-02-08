@@ -6,7 +6,7 @@
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 02:17:41 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/08 02:17:44 by mmeuric          ###   ########.fr       */
+/*   Updated: 2025/02/08 02:37:16 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	msg_error(char *text, int digit)
 
 void	ft_clean(t_init *init)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < init->philo_count)

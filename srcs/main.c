@@ -6,7 +6,7 @@
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 01:57:44 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/08 02:21:00 by mmeuric          ###   ########.fr       */
+/*   Updated: 2025/02/08 02:36:46 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_init init;
+	t_init	init;
 
 	ft_verif(argc, argv);
 	ft_init(&init, argv);
