@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 00:44:27 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/06 03:04:21 by mmeuric          ###   ########.fr       */
+/*   Created: 2025/02/08 01:59:40 by mmeuric           #+#    #+#             */
+/*   Updated: 2025/02/08 02:22:22 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
+void	putstr_fd(int fd, char *str)
+{
+	while (*str)
+		write(fd, str++, 1);
+}
+
 long	ft_atoi(const char *str)
 {
-	long	nb;
-	int		sign;
-	int		i;
+	long nb;
+	int sign;
+	int i;
 
 	i = 0;
 	sign = 1;

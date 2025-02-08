@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 00:44:49 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/06 03:02:38 by mmeuric          ###   ########.fr       */
+/*   Created: 2025/02/08 01:57:44 by mmeuric           #+#    #+#             */
+/*   Updated: 2025/02/08 02:21:00 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo philos[MAX_PHILO];
-	pthread_mutex_t forks[MAX_PHILO];
 	t_init init;
 
 	ft_verif(argc, argv);
-	ft_init(&init, philos, forks);
-	init_forks(&init, forks, ft_atoi(argv[1]));
-	init_philos(&init, philos, forks, argv);
-	philo(&init, philos[0].philo_count);
-	ft_clean(&init, NULL, philos[0].philo_count, 0);
+	ft_init(&init, argv);
+	close_simulation(&init);
+	ft_clean(&init);
 	return (0);
 }

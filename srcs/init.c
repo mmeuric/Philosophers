@@ -5,67 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 00:44:39 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/06 02:51:30 by mmeuric          ###   ########.fr       */
+/*   Created: 2025/02/08 02:17:19 by mmeuric           #+#    #+#             */
+/*   Updated: 2025/02/08 02:17:21 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_philos(t_init *init, t_philo *philos, pthread_mutex_t *forks, char **argv)
+t_philo	*ft_init_philo(t_init *init, int count)
+{
+	t_philo	*philo;
+	int		init_count;
+
+	philo = malloc(sizeof(t_philo));
+	philo->nb_print = count + 1;
+	philo->nb_eat = 0;
+	philo->times.first_time = get_current_time();
+	philo->times.last_eat = get_current_time();
+	philo->init = init;
+	init_count = philo->init->philo_count;
+	philo->left_fork = &philo->init->fork[count];
+	if (init_count == 1)
+		philo->right_fork = NULL;
+	else
+		philo->right_fork = &philo->init->fork[(count + 1) % init_count];
+	pthread_mutex_init(&philo->meal_lock, NULL);
+	pthread_create(&philo->thread, NULL, monitor, philo);
+	return (philo);
+}
+
+void	ft_init_thread(t_init *init)
 {
 	int	i;
 
-	i = -1;
-	while (++i < ft_atoi(argv[1]))
+	i = 0;
+	pthread_mutex_init(&init->write_lock, NULL);
+	pthread_mutex_init(&init->end, NULL);
+	init->philos = malloc(init->philo_count * sizeof(t_philo));
+	init->fork = malloc(init->philo_count * sizeof(pthread_mutex_t));
+	while (i < init->philo_count)
 	{
-		philos[i].id = i + 1;
-		philos[i].times.die = ft_atoi(argv[2]);
-		philos[i].times.eat = ft_atoi(argv[3]);
-		philos[i].times.sleep = ft_atoi(argv[4]);
-		philos[i].times.last_meal = get_current_time();
-		philos[i].times.first_time = get_current_time();
-		philos[i].must_eat = -1;
-		if (argv[5])
-			philos[i].must_eat = ft_atoi(argv[5]);
-		philos[i].meals_eaten = 0;
-		philos[i].philo_count = ft_atoi(argv[1]);
-		philos[i].mutexes.l_fork = &forks[i];
-		if (i == 0)
-			philos[i].mutexes.r_fork = &forks[philos[i].philo_count - 1];
-		else
-			philos[i].mutexes.r_fork = &forks[i - 1];
-		philos[i].mutexes.write_lock = &init->write_lock;
-		philos[i].mutexes.meal_lock = &init->meal_lock;
+		pthread_mutex_init(&init->fork[i], NULL);
+		init->philos[i] = ft_init_philo(init, i);
+		i++;
 	}
 }
 
-size_t	get_current_time(void)
+void	ft_init(t_init *init, char **argv)
 {
-	t_timeval	time;
+	init->philo_count = ft_atoi(argv[1]);
+	init->times.die = ft_atoi(argv[2]);
+	init->times.eat = ft_atoi(argv[3]);
+	init->times.sleep = ft_atoi(argv[4]);
+	init->is_end = 0;
+	if (argv[5])
+		init->must_eat = ft_atoi(argv[5]);
+	else
+		init->must_eat = -1;
+	ft_init_thread(init);
+}
+
+long	get_current_time(void)
+{
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
-		msg_error("gettimeofday error\n", 1);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
-
-void	init_forks(t_init *init, pthread_mutex_t *forks, int count)
-{
-	int	i;
-
-	i = -1;
-	while (++i < count)
 	{
-		if (pthread_mutex_init(&forks[i], NULL) != 0)
-			ft_clean(init, "Error Mutex Init\n", i, 1);
+		perror("gettimeofday error");
+		return (-1);
 	}
-}
-
-void	ft_init(t_init *init, t_philo *philos, pthread_mutex_t *forks)
-{
-	init->forks = forks;
-	init->philos = philos;
-	if (pthread_mutex_init(&init->write_lock, NULL) != 0
-		|| pthread_mutex_init(&init->meal_lock, NULL) != 0)
-		ft_clean(init, "Error Mutex Init\n", -1, 1);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
