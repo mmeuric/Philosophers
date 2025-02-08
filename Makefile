@@ -40,9 +40,9 @@ $(OBJS_DIR) :
 	@$(MKDIR) $(OBJS_DIR)
 
 $(NAME) : $(OBJS) Makefile
-	@echo "$(BOLD)$(RED)🛠️      Compiling Philosophers     🛠️$(RESET)"
+	@echo "$(BOLD)$(RED)👴      Compiling Philosophers     👴$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LINKER) -o $(NAME)
-	@echo "$(BOLD)$(GREEN)🚀     Philosophers compiled, Ready to use     🚀$(RESET)"
+	@echo "$(BOLD)$(GREEN)🍝     Philosophers compiled, Ready to think !     🍝$(RESET)"
 	@echo "\n$(BOLD)🌟 Usage: ./philo [nb_philos] [time_to_die] [time_to_eat] [time_to_sleep] and with or not [nb_of_dinners] 🌟$(RESET)"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(INCLUDES)
