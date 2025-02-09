@@ -6,7 +6,7 @@
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 02:17:19 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/08 21:49:24 by mmeuric          ###   ########.fr       */
+/*   Updated: 2025/02/09 01:04:16 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_init(t_init *init, char **argv)
 	init->times.eat = ft_atoi(argv[3]);
 	init->times.sleep = ft_atoi(argv[4]);
 	init->is_end = 0;
+	init->count_ms = 50;
 	if (argv[5])
 		init->must_eat = ft_atoi(argv[5]);
 	else

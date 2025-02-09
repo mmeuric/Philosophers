@@ -6,7 +6,7 @@
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 02:18:01 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/08 23:25:20 by mmeuric          ###   ########.fr       */
+/*   Updated: 2025/02/09 00:58:55 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	*close_simulation(t_init *init)
 {
 	int	i;
 
+	init->times.die += init->count_ms;
 	while (philo_ate(init))
 	{
 		i = -1;
@@ -91,8 +92,7 @@ void	*close_simulation(t_init *init)
 		{
 			pthread_mutex_lock(&init->philos[i]->meal_lock);
 			if (get_current_time()
-				- init->philos[i]->times.last_eat > usleep((init->times.die
-						+ 150) * 1000))
+				- init->philos[i]->times.last_eat > init->times.die)
 			{
 				pthread_mutex_lock(&init->end);
 				init->is_end = 1;

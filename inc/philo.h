@@ -6,7 +6,7 @@
 /*   By: mmeuric <mmeuric@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 02:16:28 by mmeuric           #+#    #+#             */
-/*   Updated: 2025/02/08 02:16:30 by mmeuric          ###   ########.fr       */
+/*   Updated: 2025/02/09 00:59:08 by mmeuric          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_init
 	int					philo_count;
 	int					must_eat;
 	int					is_end;
+	int					count_ms;
 	t_philo				**philos;
 	t_times				times;
 	pthread_mutex_t		*fork;
