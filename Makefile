@@ -22,7 +22,7 @@ INCLUDES		= $(INCLUDES_DIR)/philo.h
 
 # Sources
 SRCS_DIR		= srcs/
-SRC_FILES		= main.c \
+SRC_FILES		= main.c \ 
 				  init.c \
 				  utils.c \
 				  ft_atoi.c \
